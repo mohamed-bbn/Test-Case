@@ -1,0 +1,8 @@
+{
+    "/api": {
+        "target": "https://erpapi.nc.sa/erp",
+        "secure": false,
+        "changeOrigin": true,
+        "pathRewrite": { "^/api": "" }
+    }
+}

@@ -1,0 +1,13 @@
+<header class="header">
+    <div class="burger" (click)="toggleLink($event)">
+        <span class="burger-line"></span>
+        <span class="burger-line"></span>
+        <span class="burger-line"></span>
+    </div>
+    <!-- End burger -->
+    <div class="nameuser">
+        <div class="photo"> <img [src]="userPhoto" loading="lazy"></div>
+        <p>Welcom {{ userName }}</p>
+    </div>
+    <!-- End nameuser -->
+</header>

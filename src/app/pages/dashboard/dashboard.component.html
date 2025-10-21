@@ -1,0 +1,17 @@
+<section class="dashboard" [class.unactive]="isUnactive">
+    <app-sidebar></app-sidebar>
+    <!-- End sidebar -->
+    <div class="page-content">
+        <app-header></app-header>
+        <!-- End header -->
+        <div class="innercontent flex">
+            <div class="dashboard-welcome">
+                <h1 class="title">Welcome,<br> <span>{{ userName }} </span>👋</h1>
+                <p>You can browse all employees from the employee list, add new employees,<br> or edit existing employee data.</p>
+                <a routerLink="/employees" class="bottom"> All employees </a>
+            </div>
+        </div>
+        <!-- End innercontent -->
+    </div>
+    <!-- End page-content -->
+</section>

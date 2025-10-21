@@ -1,59 +1,103 @@
-# EmployeeManagement
+# Employee Management System
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.15.
+A simple Angular project for managing employees — including displaying, searching, editing, and deleting employee data.  
+Built using **Angular 19** and **JSON Server** for mock API data.
 
-## Development server
+---
 
-To start a local development server, run:
+#  How to Run the Project
 
+# Install dependencies
+Run this command to install all required packages:
+```bash
+npm install
+```
+
+# Start the mock API (JSON Server)
+To run the fake API locally, use:
+```bash
+npm install -g json-server
+json-server --watch db.json --port 3000
+```
+
+The API will now be available at:
+`http://localhost:3000/employees`
+
+---
+
+ Start the Angular app
+Now start your Angular development server:
 ```bash
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Then open your browser at:
+ `http://localhost:4200/`
 
-## Code scaffolding
+---
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+# Project Structure
 
-```bash
-ng generate component component-name
+```
+src/
+ ├── app/
+ │    ├── services/
+ │    │     └── employee.service.ts     → Handles API calls using HttpClient
+ │    ├── components/
+ │    │     ├── employee-list/          → Displays employees in a grid
+ │    │     ├── employee-edit/          → Edit form for employees
+ │    │     └── header/                 → Shared header component
+ │    └── app.routes.ts                 → Application routes
+ ├── assets/
+ │    └── images/                       → Project images
+ ├── db.json                            → Mock employee data (used by JSON Server)
+ └── styles.scss                        → Global styles
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+---
 
-```bash
-ng generate --help
+# Example Employee Data (db.json)
+```json
+{
+  "employees": [
+    {
+      "id": 1,
+      "fullName": "Mohamed Ahmed",
+      "department": "IT",
+      "hireDate": "2021-03-15",
+      "status": "Active"
+    },
+    {
+      "id": 2,
+      "fullName": "Sara Ali",
+      "department": "HR",
+      "hireDate": "2020-06-20",
+      "status": "Suspended"
+    }
+  ]
+}
 ```
 
-## Building
+---
 
-To build the project run:
+# Technologies Used
+- **Angular 17**
+- **TypeScript**
+- **RxJS**
+- **JSON Server**
+- **SASS (SCSS)** for styling
 
-```bash
-ng build
-```
+---
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## 📋 Features
+ Display all employees in a responsive grid  
+ Search by name or department  
+ Add / Edit / Delete employees  
+ Status badge (Active / Suspended)  
+ Mock backend using JSON Server  
 
-## Running unit tests
+---
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+##  Author
+**Mohamed Ahmed**  
+Front-End Developer   
