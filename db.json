@@ -1,31 +1,32 @@
 {
-    "employees": [{
-            "id": 1,
-            "name": "Mohamed Ahmed",
-            "department": "IT",
-            "date": "2023-01-15",
-            "status": "Active"
-        },
-        {
-            "id": 2,
-            "name": "Ali Hassan",
-            "department": "back end",
-            "date": "2022-08-10",
-            "status": "Suspended"
-        },
-        {
-            "id": 3,
-            "name": "rasha mohamed",
-            "department": "HR",
-            "date": "2022-08-10",
-            "status": "Active"
-        },
-        {
-            "id": 4,
-            "name": "ahmed mohamed",
-            "department": "HR",
-            "date": "2025-10-21",
-            "status": "Suspended"
-        }
-    ]
+  "employees": [
+    {
+      "id": 1,
+      "name": "Mohamed Ahmed",
+      "department": "IT",
+      "date": "2023-01-15",
+      "status": "Active"
+    },
+    {
+      "id": 2,
+      "name": "Ali Hassan",
+      "department": "back end",
+      "date": "2022-08-10",
+      "status": "Suspended"
+    },
+    {
+      "id": 3,
+      "name": "rasha mohamed",
+      "department": "HR",
+      "date": "2022-08-10",
+      "status": "Active"
+    },
+    {
+      "id": 4,
+      "name": "ahmed mohamed",
+      "department": "HR",
+      "date": "2025-10-21",
+      "status": "Suspended"
+    }
+  ]
 }

@@ -71,7 +71,7 @@ body {
     }
     label {
         display: block;
-        color: $blak;
+        color: $dark;
         margin-bottom: $com-spacing-1;
         text-transform: capitalize;
     }
@@ -88,7 +88,7 @@ body {
         right: $com-spacing-3;
         top: 44px;
         cursor: pointer;
-        color: $blak;
+        color: $dark;
         background: $ofwhite;
         padding: $zero $com-spacing-3;
         border-radius: 8px;
@@ -236,7 +236,7 @@ select.form-control {
                 display: flex;
                 align-items: center;
                 width: $fullwidth;
-                color: $blak;
+                color: $dark;
                 text-transform: capitalize;
                 margin-top: $com-spacing-4;
                 padding: $zero $com-spacing-3;
@@ -315,7 +315,7 @@ select.form-control {
                     opacity: 1;
                     border: none;
                     outline: none;
-                    background: $blak;
+                    background: $dark;
                     @include transition(all 0.5s ease-in-out 0s);
                     &:nth-child(1) {
                         top: 0px;
@@ -353,7 +353,7 @@ select.form-control {
                     white-space: nowrap;
                     text-overflow: ellipsis;
                     overflow: hidden;
-                    color: $blak;
+                    color: $dark;
                     @media (max-width: 999px) {
                         width: 92px;
                     }
@@ -442,7 +442,7 @@ select.form-control {
             border-top: 1px solid $ofwhite;
             padding-top: $com-spacing-4;
             p {
-                color: $blak;
+                color: $dark;
                 margin: $zero;
             }
             .flex {
@@ -467,7 +467,7 @@ select.form-control {
                     }
                     span {
                         visibility: hidden;
-                        background-color: $blak;
+                        background: $blak;
                         color: $white;
                         text-align: center;
                         border-radius: 6px;
@@ -504,9 +504,6 @@ select.form-control {
 
 .empty-employees {
     text-align: center;
-    font-size: 28px;
-    font-weight: 600;
-    color: $blue;
     text-transform: capitalize;
     margin-top: $com-spacing-6;
     .photo {
@@ -519,10 +516,28 @@ select.form-control {
             max-height: $fullwidth;
         }
     }
+    p {
+        font-size: 28px;
+        font-weight: 600;
+        color: $dark;
+        text-align: center;
+    }
+    .bottom {
+        background: $none;
+        border-radius: 60px !important;
+        border: 2px solid $blue;
+        color: $blue;
+        margin-top: $com-spacing-6;
+        &:hover {
+            background: $blue;
+            color: $white;
+        }
+    }
 }
 
 .boxfilter {
     display: flex;
+    flex-wrap: wrap;
     border-block: 1px solid #dfdfdf;
     padding: $com-spacing-4 $zero;
     margin-top: $com-spacing-4;
@@ -552,20 +567,33 @@ select.form-control {
             top: 11px;
         }
     }
+    .clear-btn {
+        @include flex;
+        border: 1px solid $blue;
+        border-radius: 8px;
+        color: $blue;
+        padding: $com-spacing-1 $com-spacing-3;
+        cursor: pointer;
+    }
+}
+
+.field .form-control.invalid {
+    border: 1px solid $red !important;
 }
 
 .modal {
-    @include flex;
     position: fixed;
     inset: 0;
     background: rgba(0, 0, 0, 0.4);
-    padding: $zero $com-spacing-3;
+    padding: $com-spacing-3;
+    overflow-y: scroll;
     z-index: 1010;
     .modal-content {
+        margin: $zero $auto;
+        width: 500px;
         background: $white;
         border-radius: 10px;
-        padding: 20px;
-        width: 500px;
+        padding: $com-spacing-5;
         .minhead {
             display: flex;
             align-items: center;
@@ -592,14 +620,14 @@ select.form-control {
             padding-top: $com-spacing-4;
             margin-top: $com-spacing-4;
             border-top: 1px solid $ofwhite;
-            .bottom {
+            .bottom,
+            .close {
+                min-width: 140px;
+                max-width: 140px;
                 height: 40px;
             }
             .close {
                 @include flex;
-                min-width: 140px;
-                max-width: 140px;
-                height: 40px;
                 border: 1px solid $blue;
                 border-radius: 60px;
                 margin-left: $com-spacing-3;

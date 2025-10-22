@@ -36,26 +36,7 @@ Then open your browser at:
 
 ---
 
-# Project Structure
-
-```
-src/
- ├── app/
- │    ├── services/
- │    │     └── employee.service.ts     → Handles API calls using HttpClient
- │    ├── components/
- │    │     ├── employee-list/          → Displays employees in a grid
- │    │     ├── employee-edit/          → Edit form for employees
- │    │     └── header/                 → Shared header component
- │    └── app.routes.ts                 → Application routes
- ├── assets/
- │    └── images/                       → Project images
- ├── db.json                            → Mock employee data (used by JSON Server)
- └── styles.scss                        → Global styles
-```
-
----
-
+ 
 # Example Employee Data (db.json)
 ```json
 {
@@ -81,7 +62,7 @@ src/
 ---
 
 # Technologies Used
-- **Angular 17**
+- **Angular 19**
 - **TypeScript**
 - **RxJS**
 - **JSON Server**

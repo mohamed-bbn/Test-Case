@@ -1,4 +1,4 @@
-<section class="employees" [class.unactive]="isUnactive" y>
+<section class="employees" [class.unactive]="isUnactive">
     <app-sidebar></app-sidebar>
     <!-- End sidebar -->
     <div class="page-content">
@@ -6,102 +6,144 @@
         <!-- End header -->
         <div class="innercontent">
             <div class="minhead">
-                <h1 class="title"> employees </h1>
+                <h1 class="title">Employees</h1>
                 <a (click)="openAddPopup()" class="bottom">Add Employee</a>
             </div>
             <!-- End minhead -->
-            <div *ngIf="employees.length > 0; else noData">
 
-                <!-- End boxfilter -->
-                <div class="employee-grid">
-                    <div class="employee-card" *ngFor="let emp of employees">
-                        <h3 class="title">{{ emp.name }}</h3>
-                        <p>Department: {{ emp.department }}</p>
-                        <p>Hire Date: {{ emp.date }}</p>
-                        <p>Status: <span [ngClass]="emp.status === 'Active' ? 'green' : 'red'">{{ emp.status }}</span></p>
-                        <div class="actions">
-                            <p>actions</p>
-                            <div class="flex">
-                                <a (click)="deleteEmployee(emp.id)">
-                                    <svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M10 12V17" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/> <path d="M14 12V17" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/> <path d="M4 7H20" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/> <path d="M6 10V18C6 19.6569 7.34315 21 9 21H15C16.6569 21 18 19.6569 18 18V10" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/> <path d="M9 5C9 3.89543 9.89543 3 11 3H13C14.1046 3 15 3.89543 15 5V7H9V5Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/> </svg>
-                                    <span>delete</span>
-                                </a>
-                                <a (click)="openEditPopup(emp)">
-                                    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 121.48 122.88" style="enable-background:new 0 0 121.48 122.88" xml:space="preserve"><style type="text/css">.st0{fill-rule:evenodd;clip-rule:evenodd;}</style><g><path class="st0" d="M96.84,2.22l22.42,22.42c2.96,2.96,2.96,7.8,0,10.76l-12.4,12.4L73.68,14.62l12.4-12.4 C89.04-0.74,93.88-0.74,96.84,2.22L96.84,2.22z M70.18,52.19L70.18,52.19l0,0.01c0.92,0.92,1.38,2.14,1.38,3.34 c0,1.2-0.46,2.41-1.38,3.34v0.01l-0.01,0.01L40.09,88.99l0,0h-0.01c-0.26,0.26-0.55,0.48-0.84,0.67h-0.01 c-0.3,0.19-0.61,0.34-0.93,0.45c-1.66,0.58-3.59,0.2-4.91-1.12h-0.01l0,0v-0.01c-0.26-0.26-0.48-0.55-0.67-0.84v-0.01 c-0.19-0.3-0.34-0.61-0.45-0.93c-0.58-1.66-0.2-3.59,1.11-4.91v-0.01l30.09-30.09l0,0h0.01c0.92-0.92,2.14-1.38,3.34-1.38 c1.2,0,2.41,0.46,3.34,1.38L70.18,52.19L70.18,52.19L70.18,52.19z M45.48,109.11c-8.98,2.78-17.95,5.55-26.93,8.33 C-2.55,123.97-2.46,128.32,3.3,108l9.07-32v0l-0.03-0.03L67.4,20.9l33.18,33.18l-55.07,55.07L45.48,109.11L45.48,109.11z M18.03,81.66l21.79,21.79c-5.9,1.82-11.8,3.64-17.69,5.45c-13.86,4.27-13.8,7.13-10.03-6.22L18.03,81.66L18.03,81.66z"/></g></svg>
-                                    <span>Edit</span>
-                                </a>
-                            </div>
-                        </div>
-                        <!-- End actions -->
-                    </div>
-                    <!-- End employee-card" -->
+
+            <div class="boxfilter">
+                <!-- Search Input -->
+                <div class="field">
+                    <input type="text" class="form-control" placeholder="Search by name, department" [(ngModel)]="searchTerm" (input)="applyFilters()" />
+                    <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M10.4494 3.94C6.98655 3.94 4.17937 6.74717 4.17937 10.21C4.17937 13.6728 6.98655 16.48 10.4494 16.48C13.9122 16.48 16.7194 13.6728 16.7194 10.21C16.7194 6.74717 13.9122 3.94 10.4494 3.94ZM2.85938 10.21C2.85938 6.01816 6.25753 2.62 10.4494 2.62C14.6412 2.62 18.0394 6.01816 18.0394 10.21C18.0394 14.4018 14.6412 17.8 10.4494 17.8C6.25753 17.8 2.85938 14.4018 2.85938 10.21Z" fill="#1A1A32"></path>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M14.8832 14.6438C15.1409 14.3861 15.5588 14.3861 15.8166 14.6438L19.8261 18.6533C20.0838 18.9111 20.0838 19.3289 19.8261 19.5867C19.5683 19.8444 19.1504 19.8444 18.8927 19.5867L14.8832 15.5772C14.6254 15.3194 14.6254 14.9016 14.8832 14.6438Z" fill="#1A1A32"></path>
+                        </svg>
                 </div>
-                <!-- EN demployee-grid -->
+                <!-- Status field -->
+                <div class="field">
+                    <select [(ngModel)]="statusFilter" (change)="applyFilters()" class="form-control">
+                            <option value="all">All Status</option>
+                            <option value="Active">Active</option>
+                            <option value="Suspended">Suspended</option>
+                        </select>
+                </div>
+                <!-- Clear Filters Button -->
+                <div class="field">
+                    <a (click)="clearFilters()" class="clear-btn" *ngIf="searchTerm || statusFilter !== 'all'">
+                            Clear Filters
+                        </a>
+                </div>
             </div>
-            <!-- ENd employee -->
+            <!-- End boxfilter -->
 
-            <ng-template #noData>
+            <!-- <div class="results-info" *ngIf="employees.length !== allEmployees.length">
+                    <p>Showing {{ employees.length }} of {{ allEmployees.length }} employees</p>
+                </div> -->
+
+            <div class="employee-grid" *ngIf="employees.length > 0; else noResults">
+                <div class="employee-card" *ngFor="let emp of employees">
+                    <h3 class="title">{{ emp.name }}</h3>
+                    <p>Department: {{ emp.department }}</p>
+                    <p>Hire Date: {{ emp.date | date:'mediumDate' }}</p>
+                    <p>Status: <span [ngClass]="emp.status === 'Active' ? 'green' : 'red'">{{ emp.status }}</span></p>
+                    <div class="actions">
+                        <p>actions</p>
+                        <div class="flex">
+                            <a (click)="deleteEmployee(emp.id)">
+                                <svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M10 12V17" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/> <path d="M14 12V17" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/> <path d="M4 7H20" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/> <path d="M6 10V18C6 19.6569 7.34315 21 9 21H15C16.6569 21 18 19.6569 18 18V10" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/> <path d="M9 5C9 3.89543 9.89543 3 11 3H13C14.1046 3 15 3.89543 15 5V7H9V5Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/> </svg>
+                                <span>delete</span>
+                            </a>
+                            <a (click)="openEditPopup(emp)">
+                                <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 121.48 122.88" style="enable-background:new 0 0 121.48 122.88" xml:space="preserve"><style type="text/css">.st0{fill-rule:evenodd;clip-rule:evenodd;}</style><g><path class="st0" d="M96.84,2.22l22.42,22.42c2.96,2.96,2.96,7.8,0,10.76l-12.4,12.4L73.68,14.62l12.4-12.4 C89.04-0.74,93.88-0.74,96.84,2.22L96.84,2.22z M70.18,52.19L70.18,52.19l0,0.01c0.92,0.92,1.38,2.14,1.38,3.34 c0,1.2-0.46,2.41-1.38,3.34v0.01l-0.01,0.01L40.09,88.99l0,0h-0.01c-0.26,0.26-0.55,0.48-0.84,0.67h-0.01 c-0.3,0.19-0.61,0.34-0.93,0.45c-1.66,0.58-3.59,0.2-4.91-1.12h-0.01l0,0v-0.01c-0.26-0.26-0.48-0.55-0.67-0.84v-0.01 c-0.19-0.3-0.34-0.61-0.45-0.93c-0.58-1.66-0.2-3.59,1.11-4.91v-0.01l30.09-30.09l0,0h0.01c0.92-0.92,2.14-1.38,3.34-1.38 c1.2,0,2.41,0.46,3.34,1.38L70.18,52.19L70.18,52.19L70.18,52.19z M45.48,109.11c-8.98,2.78-17.95,5.55-26.93,8.33 C-2.55,123.97-2.46,128.32,3.3,108l9.07-32v0l-0.03-0.03L67.4,20.9l33.18,33.18l-55.07,55.07L45.48,109.11L45.48,109.11z M18.03,81.66l21.79,21.79c-5.9,1.82-11.8,3.64-17.69,5.45c-13.86,4.27-13.8,7.13-10.03-6.22L18.03,81.66L18.03,81.66z"/></g></svg>
+                                <span>Edit</span>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- End actions -->
+                </div>
+                <!-- End employee-card -->
+            </div>
+            <!-- End employee-grid -->
+
+            <ng-template #noResults>
                 <div class="empty-employees">
                     <div class="photo">
-                        <img loading="lazy" src="assets/images/empty.png" alt="" title="">
-                    </div> There are no employees
+                        <img loading="lazy" src="assets/images/empty.png" alt="No employees" title="No employees">
+                    </div>
+                    <p>No employees match your filters</p>
+                    <a (click)="clearFilters()" class="bottom">Clear Filters</a>
                 </div>
-                <!--End empty-employees -->
             </ng-template>
+
         </div>
         <!-- End innercontent -->
     </div>
     <!-- End page-content -->
 </section>
-
-
+<!-- End employees -->
 
 <!-- Popup -->
 <div *ngIf="isPopupOpen" class="modal">
     <div class="modal-content">
-
         <div class="minhead">
-            <h3 class="title">{{ currentEmployeeId ? 'Employee Edit' : 'Add new employee' }}</h3>
-            <a (click)="closePopup()" class="close">
+            <h3 class="title">{{ currentEmployeeId ? 'Edit Employee' : 'Add New Employee' }}</h3>
+            <a (click)="closePopup()" class="close" aria-label="Close">
                 <svg width="10" height="10" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
                  <path d="M6.66271 6.00002L11.8625 0.800231C12.0455 0.617161 12.0455 0.320349 11.8625 0.137303C11.6794 -0.0457441 11.3826 -0.0457675 11.1995 0.137303L5.99975 5.33709L0.799987 0.137303C0.616917 -0.0457675 0.320105 -0.0457675 0.137058 0.137303C-0.0459882 0.320373 -0.0460117 0.617185 0.137058 0.800231L5.33682 6L0.137058 11.1998C-0.0460117 11.3829 -0.0460117 11.6797 0.137058 11.8627C0.228582 11.9542 0.348558 12 0.468535 12C0.588511 12 0.708464 11.9542 0.800011 11.8627L5.99975 6.66295L11.1995 11.8627C11.291 11.9542 11.411 12 11.531 12C11.651 12 11.7709 11.9542 11.8625 11.8627C12.0455 11.6796 12.0455 11.3828 11.8625 11.1998L6.66271 6.00002Z" fill="#ff0000"></path>
                 </svg>
             </a>
         </div>
         <!-- End minhead -->
-
         <form [formGroup]="editForm" (ngSubmit)="saveEdit()">
             <div class="field">
-                <label>Name</label>
-                <input class="form-control" formControlName="name" type="text" />
+                <label for="name">Name</label>
+                <input id="name" class="form-control" formControlName="name" type="text" [class.invalid]="editForm.get('name')?.invalid && (editForm.get('name')?.touched || submitted)" />
+                <p class="error" *ngIf="editForm.get('name')?.invalid && (editForm.get('name')?.touched || submitted)">
+                    Name is required
+                </p>
             </div>
             <!-- End field -->
 
             <div class="field">
-                <label>Department</label>
-                <input class="form-control" formControlName="department" type="text" />
-            </div>
-            <!-- End field -->
-            <div class="field">
-                <label>date </label>
-                <input class="form-control" formControlName="date" type="date" />
+                <label for="department">Department</label>
+                <input id="department" class="form-control" formControlName="department" type="text" [class.invalid]="editForm.get('department')?.invalid && (editForm.get('department')?.touched || submitted)" />
+                <p class="error" *ngIf="editForm.get('department')?.invalid && (editForm.get('department')?.touched || submitted)">
+                    Department is required
+                </p>
             </div>
             <!-- End field -->
 
             <div class="field">
-                <label>Status</label>
-                <select class="form-control" formControlName="status">
+                <label for="date">Hire Date</label>
+                <input id="date" class="form-control" formControlName="date" type="date" [class.invalid]="editForm.get('date')?.invalid && (editForm.get('date')?.touched || submitted)" />
+                <p class="error" *ngIf="editForm.get('date')?.invalid && (editForm.get('date')?.touched || submitted)">
+                    Date is required
+                </p>
+            </div>
+            <!-- End field -->
+
+            <div class="field">
+                <label for="status">Status</label>
+                <select id="status" class="form-control" formControlName="status" [class.invalid]="editForm.get('status')?.invalid && (editForm.get('status')?.touched || submitted)">
                     <option value="Active">Active</option>
-                    <option value="Suspended"> Suspended</option>
+                    <option value="Suspended">Suspended</option>
                 </select>
+                <p class="error" *ngIf="editForm.get('status')?.invalid && (editForm.get('status')?.touched || submitted)">
+                    Status is required
+                </p>
             </div>
             <!-- End field -->
+
             <div class="popup-buttons">
-                <button type="submit" Class="bottom">{{ isEditMode ? 'Save edit' : 'Add employee' }}</button>
-                <a (click)="closePopup()" class="close"> Close </a>
+                <button type="submit" class="bottom">
+                    {{ isEditMode ? 'Save Changes' : 'Add Employee' }}
+                </button>
+                <a (click)="closePopup()" class="close">Cancel</a>
             </div>
             <!-- End popup-buttons -->
         </form>
     </div>
 </div>
-<!-- Popup -->
+<!-- End Popup -->
