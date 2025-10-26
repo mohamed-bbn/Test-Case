@@ -5,6 +5,7 @@ import { ReactiveFormsModule, FormBuilder, FormGroup, Validators, FormsModule } 
 import { SidebarComponent } from "../../shared/components/sidebar/sidebar.component";
 import { HeaderComponent } from "../../shared/components/header/header.component";
 import { HeaderService } from '../../services/header.service';
+import { EmployeesService } from '../../services/employees.service';
 
 interface Employee {
   id: number;
@@ -48,7 +49,8 @@ export class EmployeesComponent implements OnInit {
   constructor(
     private headerService: HeaderService,
     private fb: FormBuilder, 
-    private http: HttpClient
+    private http: HttpClient,
+     private employeesService: EmployeesService,
   ) {
     this.editForm = this.fb.group({
       name: ['', Validators.required],
@@ -67,13 +69,15 @@ export class EmployeesComponent implements OnInit {
   }
 
   getEmployees() {
-    this.http.get<Employee[]>(this.apiUrl).subscribe({
+    this.employeesService.getallEmployees().subscribe({
       next: data => {
-        this.allEmployees = Array.isArray(data) ? data : [];
-        this.applyFilters(); // Apply filters after loading data
+        // this.allEmployees = Array.isArray(data) ? data : [];
+        // this.applyFilters(); // Apply filters after loading data
+        console.log(data)
       },
       error: err => console.error('Failed to fetch employees', err)
     });
+    
   }
 
   // Apply both search and status filters
