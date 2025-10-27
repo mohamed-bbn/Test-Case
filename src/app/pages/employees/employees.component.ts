@@ -30,7 +30,7 @@ interface Employee {
   styleUrls: ['./employees.component.scss']
 })
 export class EmployeesComponent implements OnInit {
-  private apiUrl = 'http://localhost:3000/employees';
+  // private apiUrl = 'http://localhost:3000/employees';
 
   // State variables
   isUnactive = false;
@@ -50,7 +50,7 @@ export class EmployeesComponent implements OnInit {
     private headerService: HeaderService,
     private fb: FormBuilder, 
     private http: HttpClient,
-     private employeesService: EmployeesService,
+    private employeesService: EmployeesService,
   ) {
     this.editForm = this.fb.group({
       name: ['', Validators.required],
@@ -68,16 +68,16 @@ export class EmployeesComponent implements OnInit {
     this.getEmployees();
   }
 
+ 
   getEmployees() {
     this.employeesService.getallEmployees().subscribe({
       next: data => {
-        // this.allEmployees = Array.isArray(data) ? data : [];
-        // this.applyFilters(); // Apply filters after loading data
-        console.log(data)
+        this.allEmployees = Array.isArray(data) ? data : [];  //    
+        this.applyFilters();  //      
+        console.log(data);
       },
       error: err => console.error('Failed to fetch employees', err)
     });
-    
   }
 
   // Apply both search and status filters
@@ -145,31 +145,33 @@ export class EmployeesComponent implements OnInit {
   }
 
   // Save employee (add or edit)
+ 
   saveEdit() {
-      if (this.editForm.invalid) {
-        this.editForm.markAllAsTouched();
-        return;
-      }
-
-      if (this.currentEmployeeId !== null) {
-        //Edit employee
-        const index = this.employees.findIndex(emp => emp.id === this.currentEmployeeId);
-        if (index !== -1) {
-          this.employees[index] = { id: this.currentEmployeeId, ...this.editForm.value };
-        }
-      } else {
-        // Add  new employee
-        const newId = this.employees.length > 0 ? Math.max(...this.employees.map(e => e.id)) + 1 : 1;
-        this.employees.push({ id: newId, ...this.editForm.value });
-      }
-
-      this.isPopupOpen = false;
-      this.currentEmployeeId = null;
-       this.isEditMode = true,
-      // Optional: Reset the form after adding
-      this.editForm.reset();
+  if (this.editForm.invalid) {
+    this.editForm.markAllAsTouched();
+    return;
   }
 
+  if (this.currentEmployeeId !== null) {
+    // Edit employee
+    const index = this.allEmployees.findIndex(emp => emp.id === this.currentEmployeeId);
+    if (index !== -1) {
+      this.allEmployees[index] = { id: this.currentEmployeeId, ...this.editForm.value };
+    }
+  } else {
+    // Add new employee
+    const newId = this.allEmployees.length > 0 ? Math.max(...this.allEmployees.map(e => e.id)) + 1 : 1;
+    this.allEmployees.push({ id: newId, ...this.editForm.value });
+  }
+
+  // Apply filters to update displayed employees
+  this.applyFilters();
+
+  this.isPopupOpen = false;
+  this.currentEmployeeId = null;
+  this.isEditMode = false;
+  this.editForm.reset();
+}
   // Close popup and reset form
   closePopup() {
     this.isPopupOpen = false;
